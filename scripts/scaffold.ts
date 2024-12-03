@@ -1,6 +1,12 @@
 import { ensureDir } from "@std/fs";
 
-let day = Deno.args[0] || [...Deno.readDirSync("./days")].at(-1)!.name + 1;
+// let day = Deno.args[0] || [...Deno.readDirSync("./days")].at(-1)!.name + 1;
+let day = Deno.args[0];
+if (day == undefined) {
+  console.log("Specify the day!!");
+  Deno.exit(1);
+}
+
 day = day.padStart(2, "0");
 
 await ensureDir(`./days/${day}`);

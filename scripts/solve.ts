@@ -7,5 +7,13 @@ input = input.concat(".txt");
 const { partOne, partTwo } = await import(`../days/${day}/solution.ts`);
 const data = await Deno.readTextFile(`days/${day}/${input}`);
 
-console.log(`First part: ${partOne(data)}`);
-console.log(`Second part: ${partTwo(data)}`);
+const startOne = performance.now();
+const resultOne = partOne(data);
+const endOne = performance.now();
+
+const startTwo = performance.now();
+const resultTwo = partTwo(data);
+const endTwo = performance.now();
+
+console.log(`First part: ${resultOne} (${(endOne - startOne).toFixed(2)}ms)`);
+console.log(`Second part: ${resultTwo} (${(endTwo - startTwo).toFixed(2)}ms)`);
