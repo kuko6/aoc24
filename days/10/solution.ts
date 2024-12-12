@@ -2,7 +2,7 @@ function parseInput(input: string) {
   const trailMap = input.trim().split("\n").map((line) =>
     line.split("").map(Number)
   );
-  let trailheads: number[][] = [];
+  const trailheads: number[][] = [];
   for (let i = 0; i < trailMap.length; i++) {
     for (let j = 0; j < trailMap[0].length; j++) {
       if (trailMap[i][j] === 0) trailheads.push([i, j]);
