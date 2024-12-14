@@ -1,3 +1,5 @@
+// inspired by https://www.youtube.com/watch?v=KXwKGWSQvS0
+
 function parseInput(input: string) {
   return input.trim().split("\n").map((x) => x.split(""));
 }
@@ -33,6 +35,24 @@ function bfs(
   return region;
 }
 
+function getRegions(grid: string[][]): Set<string>[] {
+  const regions = [];
+  let seen: Set<string> = new Set();
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (seen.has(`${i},${j}`)) continue;
+      seen.add(`${i},${j}`);
+
+      const newRegion = bfs(grid, i, j, grid[i][j]);
+      regions.push(newRegion);
+      seen = seen.union(newRegion);
+    }
+  }
+
+  return regions;
+}
+
 function getPrice(regions: Set<string>[]) {
   let price = 0;
   regions.forEach((region) => {
@@ -52,19 +72,8 @@ function getPrice(regions: Set<string>[]) {
 
 export function partOne(input: string): number {
   const grid = parseInput(input);
-  const regions = [];
-  let seen: Set<string> = new Set();
+  const regions = getRegions(grid);
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[0].length; j++) {
-      if (seen.has(`${i},${j}`)) continue;
-      seen.add(`${i},${j}`);
-
-      const newRegion = bfs(grid, i, j, grid[i][j]);
-      regions.push(newRegion);
-      seen = seen.union(newRegion);
-    }
-  }
   // console.log(regions);
   return getPrice(regions);
 }
