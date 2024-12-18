@@ -18,9 +18,9 @@ function serializeKey(coords: number[], direction: number[]) {
   return `${coords[0]},${coords[1]},${direction[0]},${direction[1]}`;
 }
 
-function deserializeKey(key: string) {
-  return key.split(",").map(Number);
-}
+// function deserializeKey(key: string) {
+//   return key.split(",").map(Number);
+// }
 
 export function partOne(input: string): number {
   const grid = parseInput(input);
@@ -51,4 +51,6 @@ export function partOne(input: string): number {
   return -1;
 }
 
-export function partTwo(input: string): number {}
+export function partTwo(input: string): number {
+  return -1;
+}
