@@ -26,7 +26,7 @@ function serializeKey(coords: number[]) {
   return `${coords[0]},${coords[1]}`;
 }
 
-function findPath(grid: string[][], end: number[]) {
+function findBestPath(grid: string[][], end: number[]) {
   const visited = new Set<string>();
   const q: [number, number, number][] = []; // [x, y, distance]
   q.push([0, 0, 0]); // Start with distance 0
@@ -62,7 +62,25 @@ export function partOne(input: string): number {
 
   simulateFalling(grid, bytes, 1024);
   // console.log(grid.map((x) => x.join("")).join("\n"));
-  return findPath(grid, [70, 70]);
+  return findBestPath(grid, [70, 70]);
 }
 
-export function partTwo(input: string): string {}
+export function partTwo(input: string): number[] {
+  const bytes = parseInput(input);
+
+  let l = 1024;
+  let r = bytes.length - 1;
+  let mid = 0;
+  while (l < r) {
+    mid = Math.floor((r + l) / 2);
+    const grid = getGrid(71);
+    simulateFalling(grid, bytes, mid);
+    if (findBestPath(grid, [70, 70]) === -1) {
+      r = mid;
+    } else {
+      l = mid + 1;
+    }
+  }
+
+  return bytes[mid];
+}
