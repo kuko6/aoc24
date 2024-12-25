@@ -2,9 +2,7 @@ function parseInput(input: string) {
   return input.trim().split("\n").map((x) => x.split("-"));
 }
 
-export function partOne(input: string): number {
-  const connections = parseInput(input);
-
+function getAdjList(connections: string[][]): Record<string, string[]> {
   const neighbours: Record<string, string[]> = {};
   for (const [a, b] of connections) {
     if (!neighbours[a]) neighbours[a] = [];
@@ -12,6 +10,23 @@ export function partOne(input: string): number {
     neighbours[a].push(b);
     neighbours[b].push(a);
   }
+
+  return neighbours;
+}
+
+function searchNetwork(
+  node: string,
+  req: string[],
+  neighbours: Record<string, string[]>,
+) {
+  for (const pc of req) {
+    if (neighbours[node].includes(pc)) continue;
+  }
+}
+
+export function partOne(input: string): number {
+  const connections = parseInput(input);
+  const neighbours = getAdjList(connections);
 
   const threes = new Set<string>();
   for (const a in neighbours) {
@@ -28,4 +43,7 @@ export function partOne(input: string): number {
   return threes.size;
 }
 
-export function partTwo(input: string): number {}
+export function partTwo(input: string): number {
+  const connections = parseInput(input);
+  const neighbours = getAdjList(connections);
+}
