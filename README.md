@@ -11,4 +11,4 @@ deno run solve [day] [input]
 
 Managed to get 41 stars ⭐️
 
-<details> <summary>Click to reveal image</summary> <img src="./misc/aoc_final.png" alt="Hidden content" style="margin-top: 8px; max-width: 100%;"> </details
+<details> <summary>Click to reveal image</summary> <img src="./misc/aoc_final.png" alt="Hidden content" style="margin-top: 8px; max-width: 100%;"> </details>
